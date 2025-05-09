@@ -1,0 +1,86 @@
+create view v_beam_warping2
+as 
+select 
+beam_warping.id_beamwar,
+beam_warping.id_produksi_warping,
+produksi_warping.kode_proses,
+produksi_warping.jenis_mesin,
+produksi_warping.tgl_produksi,
+beam_warping.kode_beam,
+beam_warping.ukuran_panjang,
+beam_warping.kode_proses_sizing
+from beam_warping,produksi_warping
+where beam_warping.id_produksi_warping=produksi_warping.id_produksi_warping;
+
+create view v_beam_sizing2
+as
+select 
+beam_sizing.id_beam_sizing,
+beam_sizing.id_sizing,
+produksi_sizing.id_beamwar,
+produksi_sizing.tgl_produksi,
+produksi_sizing.oka,
+produksi_sizing.konstruksi,
+beam_sizing.kode_beam,
+beam_sizing.ukuran_panjang,
+beam_sizing.draft,
+beam_sizing.kode_proses_ajl
+from beam_sizing,produksi_sizing
+where beam_sizing.id_sizing=produksi_sizing.id_sizing;
+
+database: rinq3746_new_ajl
+pass : ywq19HA86EW#
+user : rinq3746_new_ajl_user
+
+
+Error
+1. pada saat edit pembelian benang masih belum ke redirect
+2. http://localhost:8080/rjsweaving/proses/savedbeamwarping pada saat saved beam warping belum redirect
+3. data produksi warping belum bisa update/edit
+4. data beam warping (harusnya yang sudah di sizing tidak tampil)
+
+
+MISAL BEAM SIZING (32) PRODUKSI DI MESIN B-01
+KEMUDIAN MESIN ITU AKAN GANTI KONSTRUKSI
+
+
+MAKA BEAM SIZING (32) ITU BISA DI PINDAH KE MESIN B-02
+
+MISAL DALAM SATU MESIN DAN SATU BEAM SM15 KEMUDIAN GANTI PICK BUAT JADI SM15L
+
+
+-tambahan input kode beam bsm/brj di potongan kain
+
+-beam warping di input admin(mb septi)
+-pemakaian benang di input sama suplai benang
+
+tambahan serah terima benang dari gudang benang
+
+
+laporan per shift warping -> shift A, B, C atas nama operator
+laporan per shift Sizing -> atas nama karu
+
+
+Operator shift pagi nyetting
+Operator shift siang input hasil dari setting mesin shift pagi
+- operator --   id = userlogin
+- tanggal auto  id= id_tgl
+- shift = id = id_shift
+- no_mesin - id =  autocomplete
+- konstruksi - datalist  -- id   = kons
+- RPM - input  -- id = rpm
+- Pick - input  -- id = pick
+- LS  -- id = lusi
+- Mnt - -- id = mnt_lusi
+- rata2 lost (detik) = (Mnt / LS) * 60 -- id = rtrtlusi
+- pkn -input  --- id = pakan
+- mnt -input --- id = mnt_pakan
+- rata2 lost (detik) = (Mnt / Pkn) * 60 -- id =  rtrt_pakan
+- EFF - input  -- id = eff
+- produksi shif A - input  -- id = produksi
+- produksi teoritis = eff mesin * rpm *60*0,0254*8/pick   -- id= produksi_teoritis
+- persentase teoritis : (rpm/pick)*60*8*0,0254*75%  -- id = presentase_teoritis
+
+
+
+owek

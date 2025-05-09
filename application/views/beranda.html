@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Vithkuqi&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css" integrity="sha256-ZCK10swXv9CN059AmZf9UzWpJS34XvilDMJ79K+WOgc=" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="headers">
+        <div class="logoheader">
+            <img src="../../assets/logo_rjs2.jpg" alt="Logo RJS">
+        </div>
+        <h1>Dashboard Aplikasi</h1>
+    </div>
+    <div class="mainkonten">
+        <div class="menu-konten">
+            <nav>
+                <ul>
+                    <a href=""><li class="active">Home</li></a>
+                    <a href=""><li>Pembelian Benang</li></a>
+                    <a href=""><li>Stok Benang</li></a>
+                    <a href=""><li>Weaving</li></a>
+                    <a href=""><li>Sizing</li></a>
+                </ul>
+            </nav>
+        </div>
+        <div class="data-konten">
+            <!-- <div class="tengah pd50">
+                <img src="../../assets/logo_rjs2.jpg" alt="Logo RJS">
+                <h1>Welcome, PT. Rindang Jati Spinning</h1>
+            </div> -->
+            <div class="formdata">
+                <h1>Input Data Pembelian Benang</h1>
+                <div class="forminput mt-20">
+                    <label for="nama_benang">Nama Benang</label>
+                    <input type="text" placeholder="Masukan Nama Benang" name="nama_benang" id="nama_benang">
+                </div>
+                <div class="forminput mt-20">
+                    <label for="bale">Jumlah Bale</label>
+                    <input type="text" class="sm" placeholder="Masukan Jumlah Bale" name="bale" id="bale" inputmode="numeric">
+                </div>
+                <div class="forminput mt-20">
+                    <label for="netto">Netto</label>
+                    <input type="text" class="sm" placeholder="Netto" name="netto" id="netto" inputmode="numeric" readonly>
+                    <span class="smout">Jumlah Bale x 181.44</span>
+                </div>
+                <div class="forminput mt-20">
+                    <label for="karung">Jumlah Karung</label>
+                    <input type="text" class="sm" placeholder="Masukan Jumlah Karung" name="karung" id="karung" inputmode="numeric">
+                </div>
+                <div class="forminput mt-20">
+                    <label for="ne">NE</label>
+                    <input type="text" class="sm" placeholder="Masukan NE" name="ne" id="ne" inputmode="numeric">
+                </div>
+                <button class="sbmit">Submit</button>
+                <div class="karungan">
+                    <div class="box-karung">
+                        <span>Kode XE1</span>
+                        <label for="beratkarung">Berat Karung</label>
+                        <input type="text" id="beratkarung">
+                        <label for="jumlahcones">Jumlah Cones</label>
+                        <input type="text" name="cones" id="jumlahcones">
+                        <div><input type="checkbox" id="ckbox"><label for="ckbox">Sama dengan sebelumnya</label></div>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE2</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE3</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE1</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE2</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE3</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE1</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE2</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE3</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE1</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE2</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE3</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE1</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE2</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE3</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE1</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE2</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE3</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE1</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE2</span>
+                    </div>
+                    <div class="box-karung">
+                        <span>Kode XE3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js" integrity="sha256-IW9RTty6djbi3+dyypxajC14pE6ZrP53DLfY9w40Xn4=" crossorigin="anonymous"></script>
+</body>
+</html>

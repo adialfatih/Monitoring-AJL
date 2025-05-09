@@ -1,0 +1,11 @@
+{
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.27",
+        "litipk/php-bignumbers": "^0.8.6"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
+    }
+}

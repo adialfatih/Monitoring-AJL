@@ -1,0 +1,15 @@
+{
+  "name": "AJL Rindang",
+  "short_name": "AJL Rindang",
+  "lang": "id-ID",
+  "start_url": "https://ajl.rdgjt.com/login-operator",
+  "display": "standalone",
+  "theme_color": "#C6A7D0",
+  "icons": [
+    {
+    "src": "https://ajl.rdgjt.com/assets/logo_rjs2.jpg",
+    "sizes": "192x192",
+    "type": "image/png",
+    "density": "4.0"
+  }]
+}
