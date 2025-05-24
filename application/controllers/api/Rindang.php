@@ -23,13 +23,7 @@ class Rindang extends REST_Controller {
         if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
             header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
         }
-        //header("Access-Control-Allow-Origin: https://data.rdgjt.com");
-        //header("Access-Control-Allow-Origin: http://192.168.10.106:8080/");
-        // Configure limits on our controller methods
-        // Ensure you have created the 'limits' table and enabled 'limits' within application/config/rest.php
-        // $this->methods['users_get']['limit'] = 500; // 500 requests per hour per user/key
-        // $this->methods['users_post']['limit'] = 100; // 100 requests per hour per user/key
-        // $this->methods['users_delete']['limit'] = 50; // 50 requests per hour per user/key
+        
     }
 
     public function index_get()

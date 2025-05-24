@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$config['base_url'] = 'https://ajl.rdgjt.com/';
+$config['base_url'] = 'http://localhost/appAJL/Monitoring-AJL/';
 
 $config['index_page'] = '';
 
@@ -27,7 +27,7 @@ $config['controller_trigger'] = 'c';
 $config['function_trigger'] = 'm';
 $config['directory_trigger'] = 'd';
 
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 2;
 
 $config['log_path'] = '';
 

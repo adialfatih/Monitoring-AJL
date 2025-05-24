@@ -513,10 +513,13 @@ class Proses extends CI_Controller
         $jml_helai = $this->input->post('jml_helai');
         $no_mesin = $this->input->post('no_mesin');
         $cek_nomesin = $this->data_model->get_byid('table_mesin', ['no_mesin'=>$no_mesin])->num_rows();
+        $_kons = strtoupper($konstruksi); 
+        $cekKonstruksi = $this->data_model->get_byid('list_konstruksi', ['konstruksi'=>$_kons])->num_rows();
         if($cek_nomesin == 0){
             $this->data_model->saved('table_mesin', ['no_mesin'=>$no_mesin]);
         }
         if($id_beam!="" AND $konstruksi!="" AND $lusi!="" AND $pakan!="" AND $sisir!="" AND $pick!="" AND $pjg!="" AND $sizing!="" AND $jml_helai!="" AND $no_mesin!=""){
+            if($cekKonstruksi==1){
             $this->data_model->saved('produksi_mesin_ajl', [
                 'tgl_produksi' => $tgl,
                 'waktu_awal_produksi' => date('Y-m-d H:i:s'),
@@ -536,6 +539,9 @@ class Proses extends CI_Controller
             ]);
             //$this->data_model->updatedata('id_beam_sizing',$id_beam,'beam_sizing',['kode_proses_ajl'=>$kode_proses]);
             redirect(base_url('produksi-ajl'));
+            } else {
+                echo "Anda tidak menuliskan konstruksi dengan benar..!!";
+            }
         } else {
             echo "Anda tidak mengisi semua data dengan benar.!!";
         }

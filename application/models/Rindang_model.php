@@ -11,6 +11,34 @@ class Rindang_model extends CI_model
         }
         
     }
+    public function getAllMesin($id = null)
+    {
+        if($id === null){
+            $qry_mesin = $this->db->query("SELECT * FROM table_mesin ORDER BY no_mesin ASC");
+        } else {
+            $qry_mesin = $this->db->query("SELECT * FROM table_mesin WHERE no_mesin = ? ", [$id]);
+        }
+        $result = [];
+        foreach($qry_mesin->result() as $mc){
+            $no_mc  = $mc->no_mesin;
+            $dt     = $this->db->query("SELECT * FROM produksi_mesin_ajl WHERE no_mesin=? ORDER BY id_produksi_mesin DESC LIMIT 1", [$no_mc])->row_array();
+            
+            //$kons   = strtoupper($dt['konstruksi']);
+            $kons   = strtoupper(preg_replace('/[\s\-\.,]/', '', $dt['konstruksi']));
+            $tglprod= date('d M Y', strtotime($dt['tgl_produksi']));
+            $result[] = [
+                'no_mesin'      => $no_mc,
+                'konstruksi'    => $kons,
+                'tgl_produksi'  => $tglprod,
+                'beam_sizing'   => $dt['id_beam_sizing'],
+                'pjg_lusi'      => $dt['pjg_lusi'],
+                'pjg_lusi'      => $dt['pjg_lusi'],
+                'status_proses' => $dt['proses'],
+            ];
+        }
+        return $result;
+    }
+
     public function deletePotongan($id){
         $this->db->delete('produksi_mesin_ajl_potongan', ['id_potongan'=>$id]);
         return $this->db->affected_rows();
@@ -34,6 +62,7 @@ class Rindang_model extends CI_model
         return $this->db->affected_rows();
 
     } //end
+    
 
 
 }
