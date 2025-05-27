@@ -67,28 +67,12 @@
         .type4:hover {
             background:red;color:#fff;border-radius:4px 7px;
         }
+        .modal2{display:none;position:fixed;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0 0 0 / .5);z-index:1;animation:fadeIn 0.3s ease-in-out;padding:10px}.modal2-content{background-color:#FFFFFF;margin:15% auto;padding:20px 10px;border:1px solid #888;border-radius:10px;width:100%;max-width:500px;animation:slideIn 0.3s ease-in-out;display:flex;flex-direction:column;align-items:center;color:#000;}.close{color:#aaa;float:right;font-size:28px;font-weight:700}.close:hover,.close:focus{color:#000;text-decoration:none;cursor:pointer}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideIn{from{transform:translateY(-50px);opacity:0}to{transform:translateY(0);opacity:1}}.loader{width:50px;margin-bottom:10px;backgorund:#FFFFFF;aspect-ratio:1;border-radius:50%;background:radial-gradient(farthest-side,#ffa516 94%,#0000) top/8px 8px no-repeat,conic-gradient(#0000 30%,#ffa516);-webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);animation:l13 1s infinite linear}@keyframes l13{100%{transform:rotate(1turn)}}div.tables{width:100%;overflow-x:auto}.tables table{width:100%;border:1px solid #292a2b;border-collapse:collapse}.tables table tr th,.tables table tr td{padding:6px;white-space:nowrap}.tables table tr th{text-align:center;background:#5d5f61;color:#fff;border:1px solid #fff}.tables table tr td{text-align:center;border:1px solid #000}.autopop2{width:100%;min-height:50px;background:#1955b5;color:#FFF;position:absolute;top:0;left:0;z-index:9999;display:flex;text-align:center;padding:20px;position:fixed;display:none}.closePop2{width:30px;height:30px;background:#e70909;color:#FFF;border-radius:50%;display:flex;justify-content:center;align-items:center;position:absolute;top:10px;right:10px;display:none;position:fixed;z-index:99999}
+        .table-container{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #ddd;border-radius:8px;box-shadow:0 2px 8px rgb(0 0 0 / .05);background-color:#fff;margin:16px 0}table{width:100%;border-collapse:collapse;min-width:600px;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:14px;color:#333}thead{background-color:#f4f6f8}thead th{padding:12px 16px;text-align:left;font-weight:600;border-bottom:2px solid #ddd}tbody td{padding:12px 16px;border-bottom:1px solid #eee}tbody tr:hover{background-color:#f9f9f9;transition:background-color 0.2s ease}.table-container::-webkit-scrollbar{height:8px}.table-container::-webkit-scrollbar-track{background:#f1f1f1}.table-container::-webkit-scrollbar-thumb{background:#bbb;border-radius:4px}
+        .btn-simpan{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:12px 24px;background-color:#007bff;color:#fff;font-weight:600;border-radius:8px;cursor:pointer;overflow:hidden;user-select:none;transition:background-color 0.3s}.btn-simpan:hover{background-color:#0069d9}.btn-simpan::after{content:'';position:absolute;border-radius:50%;transform:scale(0);background:rgb(255 255 255 / .6);animation:ripple 0.6s linear;pointer-events:none;display:none}@keyframes ripple{to{transform:scale(4);opacity:0}}.spinner{width:20px;height:20px;border:2px solid #fff;border-top:2px solid #fff0;border-radius:50%;animation:spin 1s linear infinite;display:none}@keyframes spin{to{transform:rotate(360deg)}}.btn-simpan.loading .btn-text{display:none}.btn-simpan.loading .spinner{display:inline-block}
     </style>
 </head>
 <body>
-    <!-- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur impedit delectus ipsum eligendi qui ut laborum, similique, doloremque assumenda itaque est voluptatem illum. Necessitatibus consequatur optio sapiente molestiae, architecto quae.
-    <div class="loading-container">
-        <div class="loading-skeleton"></div>
-        <div class="loading-skeleton"></div>
-        <div class="loading-skeleton"></div>
-    </div> -->
-    <!-- <form action="" method="post" class="formlogin">
-    <div class="login-container">
-        <div class="login-box">
-            <img src="http://localhost:8080/rjsweaving/assets/logo_rjs2.jpg" alt="Logo RJS"> 
-            <h1>Login Operator</h1>
-            <label for="username">Username Operator</label>
-            <input type="text" id="username" placeholder="Masukan Username" required>
-            <label for="password" class="mt-15">Password Login</label>
-            <input type="password" id="password" placeholder="Masukan Password" required>
-        </div>
-        
-    </div>
-    </form> -->
     <?php 
     $nmuser = $this->session->userdata('nama');
     $akses = $this->session->userdata('akses');
@@ -186,7 +170,7 @@
         
     </div>
     </div>
-    <div class="popupfull">
+    <!-- <div class="popupfull">
         <div class="modals">
             <div class="modalsheader">
                 <h1 id="jdlmdl">Judul Modal</h1>
@@ -197,6 +181,15 @@
             </div>
             
         </div>
+    </div> -->
+    <div class="closePop2" id="klikMerah" onclick="closeModal()">x</div>
+    <div class="autopop2" id="modalBiru">
+    <div id="myModal" class="modal2">
+      <!-- Modal content -->
+      <div class="modal2-content" id="isiModals">
+          <div class="loader"></div>
+          Please Wait...
+      </div>
     </div>
     <div style="width:100%;height:100px;">&nbsp;</div>
     
@@ -217,14 +210,37 @@
         }
     ?>
     <script>
-        <?php if($nmuser=="anding"){ ?>
-        function showmodals(msn,id){
-            $('.popupfull').addClass('active');
-            $('.modals').addClass('active');
-            $('#jdlmdl').html(''+msn);
-        }
+        var modal = document.getElementById("myModal");
+        var modalBiru = document.getElementById("modalBiru");
+        var klikMerah = document.getElementById("klikMerah");
+        var btn = document.getElementById("openModalBtn");
+        var span = document.getElementsByClassName("close")[0];
+        //let cacheData = null;
+        
+        <?php if($nmuser=="anding" OR $nmuser=="admin" OR $nmuser=="septi" OR $nmuser=="septi diah" OR $nmuser=="arrum" OR $nmuser=="adish"){ ?>
+        
+            function showmodals(msn,id,idasli) { 
+                console.log('open modal 1 {'+msn+'} - {'+id+'} {'+idasli+'}');
+                $('#isiModals').html('<div class="loader"></div>Waiting Data From '+msn);
+                modal.style.display = "block"; 
+                modalBiru.style.display = "block"; 
+                klikMerah.style.display = "flex"; 
+                $.ajax({
+                    url:"<?=base_url('proses/updateKonstruksi');?>",
+                    type: "POST",
+                    data: {"id":idasli,"msn":msn, "idsha":id},
+                    cache: false,
+                    success: function(dataResult){
+                        setTimeout(() => {
+                            $('#isiModals').html(dataResult);
+                        }, 900);
+                        
+                    }
+                });
+            }
+        
         <?php } else { ?>
-        function showmodals(msn,id){
+        function showmodals(msn,id,idasli){
             document.location.href="<?=base_url('operator/mesin/');?>"+id;
         }
         <?php } ?>
@@ -287,6 +303,64 @@
                 $('.mobile-menu2').removeClass('active');
             }
         });
+        function closeModal() {
+            modal.style.display = "none";
+            modalBiru.style.display = "none"; 
+            klikMerah.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                modalBiru.style.display = "none"; 
+                klikMerah.style.display = "none";
+            }
+        }
+        function handleClick(button) {
+        // Ripple effect
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            const rect = button.getBoundingClientRect();
+            ripple.style.left = `${event.clientX - rect.left}px`;
+            ripple.style.top = `${event.clientY - rect.top}px`;
+            button.appendChild(ripple);
+
+            // Activate ripple effect
+            button.style.setProperty('--ripple-x', ripple.style.left);
+            button.style.setProperty('--ripple-y', ripple.style.top);
+            button.querySelector('::after')?.remove(); // optional
+
+            // Show ripple animation
+            button.style.setProperty('--ripple', '1');
+            button.classList.add('ripple-active');
+            button.style.setProperty('--ripple-time', '0.4s');
+
+            // Remove ripple after animation
+            setTimeout(() => {
+                ripple.remove();
+                // Show loading spinner
+                button.classList.add('loading');
+            }, 400);
+            var idAsli = document.getElementById('idReal').value;
+            var kons = document.getElementById('konstruksiID').value;
+            var pick = document.getElementById('pickID').value;
+            $.ajax({
+                url:"<?=base_url('proses/saveUpdatePick');?>",
+                type: "POST",
+                data: {"idAsli":idAsli,"kons":kons,"pick":pick},
+                cache: false,
+                success: function(dataResult){
+                    setTimeout(() => {
+                        resetToSimpan(document.querySelector('.btn-simpan'));
+                    }, 900);
+                }
+            });
+        }
+
+        // Fungsi untuk reset ke "Simpan"
+        function resetToSimpan(button) {
+            button.classList.remove('loading');
+        }
+        //resetToSimpan(document.querySelector('.btn-simpan'));
     </script>
 </body>
 </html>

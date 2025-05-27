@@ -1252,6 +1252,132 @@ class Proses extends CI_Controller
         redirect("https://ajl.rdgjt.com/data/warping/".$kode."");
   } //end
 
+    function updateKonstruksi(){
+        $id = $this->input->post('id', TRUE);
+        $mc = $this->input->post('msn', TRUE);
+        $idsha = $this->input->post('idsha', TRUE);
+        $cekData = $this->data_model->get_byid('produksi_mesin_ajl',['id_produksi_mesin'=>$id]);
+        if($cekData->num_rows() == 1){
+        } else {
+            $cekData = $this->data_model->get_byid('produksi_mesin_ajl',['sha1(id_produksi_mesin)'=>$idsha]);
+        }
+        
+            if($cekData->num_rows() == 1){
+                $_idReal = $cekData->row("id_produksi_mesin");
+                //$_kons = $cekData->row("konstruksi");
+                $_kons = strtoupper(str_replace([' ', '-', '.', ','], '', $cekData->row("konstruksi")));
+                $this->data_model->updatedata('id_produksi_mesin',$_idReal,'produksi_mesin_ajl',['konstruksi'=>$_kons]);
+                $_pick = $cekData->row("pick");
+                $_pjg_lusi = $cekData->row("pjg_lusi");
+                $_proses = $cekData->row("proses");
+                ?>
+                <p style="font-weight:bold;margin-bottom:15px;font-size:23px;">NOMOR MESIN <?=$mc;?></p>
+                <div style="width: 100%; display: flex; align-items: center; margin-bottom: 10px; font-family: 'Noto Sans', sans-serif;">
+                    <label for="konstruksiID" style="margin-right: 10px; white-space: nowrap; font-weight: 500;width:35%;text-align:left;">Konstruksi</label>
+                    <input 
+                        type="text" 
+                        id="konstruksiID" 
+                        style="flex: 1; padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; outline-color: #4a90e2;"
+                        value="<?=$_kons;?>"
+                        placeholder="Masukan konstruksi"
+                    >
+                </div>
+                <div style="width: 100%; display: flex; align-items: center; margin-bottom: 10px; font-family: 'Noto Sans', sans-serif;">
+                    <label for="pickID" style="margin-right: 10px; white-space: nowrap; font-weight: 500;width:35%;text-align:left;">Pick</label>
+                    <input 
+                        type="text" 
+                        id="pickID" 
+                        style="flex: 1; padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; outline-color: #4a90e2;"
+                        value="<?=$_pick;?>"
+                        placeholder="Masukan pick"
+                    >
+                </div>
+                <div style="width: 100%; display: flex; align-items: center; margin-bottom: 10px; font-family: 'Noto Sans', sans-serif;">
+                    <label for="pjgLUSI" style="margin-right: 10px; white-space: nowrap; font-weight: 500;width:35%;text-align:left;">Panjang Lusi</label>
+                    <input 
+                        type="text" 
+                        id="pjgLUSI" 
+                        style="flex: 1; padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; outline-color: #4a90e2;"
+                        value="<?=$_pjg_lusi;?>"
+                        placeholder="Masukan panjang lusi"
+                    >
+                </div>
+                <div style="width: 100%; display: flex; align-items: center; margin-bottom: 10px; font-family: 'Noto Sans', sans-serif;">
+                    <label for="pjgLUSI" style="margin-right: 10px; white-space: nowrap; font-weight: 500;width:35%;text-align:left;">Status</label>
+                    <?php if($_proses == "stop"){ ?>
+                    <span style="background:red;color:#fff;padding:3px 10px;border-radius:4px;">Stop</span>
+                    <?php } ?>
+                    <?php if($_proses == "onproses"){ ?>
+                    <span style="background:green;color:#fff;padding:3px 10px;border-radius:4px;">Sedang Proses</span>
+                    <?php } ?>
+                    <?php if($_proses == "finish"){ ?>
+                    <span style="background:orange;color:#fff;padding:3px 10px;border-radius:4px;">Selesai Proses</span>
+                    <?php } ?>
+                </div>
+                <input type="hidden" id="idReal" value="<?=$_idReal;?>">
+                <div style="width:100%;display:flex;justify-content:flex-end;">
+                    <div class="btn-simpan" onclick="handleClick(this)">
+                        <span class="btn-text">Simpan</span>
+                        <span class="spinner"></span>
+                    </div>
+                </div>
+                <div style="width:100%;margin:10px 0;border-top:1px solid #ccc;text-align:left;padding-top:15px;overflow-x:auto;">
+                    <div class="table-container">
+                    <table>
+                        <tr>
+                            <th colspan="5" style="padding:10px 0 0 10px;">Riwayat Mesin</th>
+                        </tr>
+                        <?php
+                            $rwyt = $this->data_model->get_byid('produksi_mesin_ajl_rwyt', ['id_produksi_mesin'=>$_idReal])->result();
+                            $r=1;
+                            foreach($rwyt as $v):
+                            $x = explode(' ',$v->timestamprwyt);
+                            $xx = explode('-', $x[0]);
+                        ?>
+                        <tr>
+                            <td><?=$r;?></td>
+                            <td><?=$v->jenis_riwayat;?></td>
+                            <td><?=$v->keterwyt;?></td>
+                            <td><?=$xx[2].'/'.$xx[1].'/'.$xx[0].' '.$x[1];?></td>
+                            <td><?=$v->operator_login;?></td>
+                        </tr>
+                        <?php $r++; endforeach; ?>
+                    </table>
+                    </div>
+                    
+                </div>
+                <?php
+            } else {
+                echo "<font style='color:red;'>Token Erorr, {".$id."} - {".$mc."}</font>";
+            }
+    }
+    function saveUpdatePick(){
+        $id = $this->input->post('idAsli', TRUE);
+        $kons = $this->input->post('kons', TRUE);
+        $pick = $this->input->post('pick', TRUE);
+        $orang = $this->session->userdata('nama');
+        $_kons = strtoupper(str_replace([' ', '-', '.', ','], '', $kons));
+        $xxt = "";
+        $cekId = $this->data_model->get_byid('produksi_mesin_ajl',['id_produksi_mesin'=>$cekId])->row_array();
+        $konsold = $cekId['konstruksi'];
+        $pickold = $cekId['pick'];
+
+        if($konsold != $_kons){
+            $xxt .= "Update konstruksi ".$konsold." -> ".$_kons." ";
+        }
+        if($pickold != $pick){
+            $xxt .= "Update pick ".$pickold." -> ".$pick."";
+        }
+        $this->data_model->saved('produksi_mesin_ajl_rwyt',[
+            'id_produksi_mesin' => $id,
+            'jenis_riwayat' => 'Update Mesin',
+            'keterwyt' => $xxt,
+            'timestamprwyt' => date('Y-m-d H:i:s'),
+            'operator_login' => $orang
+        ]);
+        $this->data_model->updatedata('id_produksi_mesin',$id,'produksi_mesin_ajl',['konstruksi'=>$_kons,'pick'=>$pick]);
+        echo "success";
+    }
   
 
 }

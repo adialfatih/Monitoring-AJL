@@ -435,7 +435,8 @@ class Prosesajax extends CI_Controller
             <?php
             $line_a = $this->db->query("SELECT * FROM table_mesin WHERE no_mesin LIKE 'A%' ORDER BY no_mesin");
             foreach ($line_a->result() as $val_a) {
-                $nmsna = $val_a->no_mesin;
+                //$nmsna = $val_a->no_mesin;
+                $nmsna = str_replace([' ', ',', '.', '-'], '', strtoupper($val_a->no_mesin));
                 $cek_dta = $this->db->query("SELECT * FROM produksi_mesin_ajl WHERE no_mesin='$nmsna' ORDER BY id_produksi_mesin DESC LIMIT 1");
                 if($cek_dta->row("proses") == "onproses"){
                     $mesin_nyala = "on";
@@ -443,15 +444,19 @@ class Prosesajax extends CI_Controller
                     $mesin_nyala = "off";
                 }
                 if($cek_dta->num_rows() == 1){
-                    $kons1 = strtoupper($cek_dta->row("konstruksi"));
+                    $id_produksi_mesin = $cek_dta->row("id_produksi_mesin");
+                    //$kons1 = strtoupper($cek_dta->row("konstruksi"));
+                    $kons1 = str_replace([' ', ',', '.', '-'], '', strtoupper($cek_dta->row("konstruksi")));
+                    $this->db->query("UPDATE produksi_mesin_ajl SET konstruksi='$kons1' WHERE id_produksi_mesin='$id_produksi_mesin'");
                 } else {
                     $kons1 = "-";
+                    $id_produksi_mesin = "null";
                 }
                 $idaa = $cek_dta->row("id_produksi_mesin");
                 $idprod=sha1($cek_dta->row("id_produksi_mesin"));
                 
             ?>
-            <div class="mesinkotak" onclick="showmodals('<?=$nmsna;?>','<?=$idprod;?>')">
+            <div class="mesinkotak" onclick="showmodals('<?=$nmsna;?>','<?=$idprod;?>','<?=$idaa;?>')">
                 <span><?=$kons1;?></span>
                 <span class="<?=$mesin_nyala;?>"><?=strtoupper($nmsna);?></span>
             </div>
@@ -463,7 +468,8 @@ class Prosesajax extends CI_Controller
             <?php
             $line_b = $this->db->query("SELECT * FROM table_mesin WHERE no_mesin LIKE 'B%' ORDER BY no_mesin");
             foreach ($line_b->result() as $val_b) {
-                $nmsnb = $val_b->no_mesin;
+                //$nmsnb = $val_b->no_mesin;
+                $nmsnb = str_replace([' ', ',', '.', '-'], '', strtoupper($val_b->no_mesin));
                 $cek_dtb = $this->db->query("SELECT * FROM produksi_mesin_ajl WHERE no_mesin='$nmsnb' ORDER BY id_produksi_mesin DESC LIMIT 1");
                 if($cek_dtb->row("proses") == "onproses"){
                     $mesin_nyala2 = "on";
@@ -471,13 +477,18 @@ class Prosesajax extends CI_Controller
                     $mesin_nyala2 = "off";
                 }
                 if($cek_dtb->num_rows() == 1){
-                    $kons2 = strtoupper($cek_dtb->row("konstruksi"));
+                    $id_produksi_mesin = $cek_dta->row("id_produksi_mesin");
+                    $this->db->query("UPDATE produksi_mesin_ajl SET no_mesin='$nmsnb' WHERE id_produksi_mesin='$id_produksi_mesin'");
+                    //$kons2 = strtoupper($cek_dtb->row("konstruksi"));
+                    $kons2 = str_replace([' ', ',', '.', '-'], '', strtoupper($cek_dtb->row("konstruksi")));
+                    $this->db->query("UPDATE produksi_mesin_ajl SET konstruksi='$kons2' WHERE id_produksi_mesin='$id_produksi_mesin'");
                 } else {
                     $kons2 = "-";
+                    $id_produksi_mesin = "null";
                 }
                 $idprodb=sha1($cek_dtb->row("id_produksi_mesin"));
             ?>
-            <div class="mesinkotak" onclick="showmodals('<?=$nmsnb;?>','<?=$idprodb;?>')">
+            <div class="mesinkotak" onclick="showmodals('<?=$nmsnb;?>','<?=$idprodb;?>','<?=$id_produksi_mesin;?>')">
                 <span><?=$kons2;?></span>
                 <span class="<?=$mesin_nyala2;?>"><?=strtoupper($nmsnb);?></span>
             </div>
@@ -487,7 +498,8 @@ class Prosesajax extends CI_Controller
             <?php
             $line_c = $this->db->query("SELECT * FROM table_mesin WHERE no_mesin LIKE 'C%' ORDER BY no_mesin");
             foreach ($line_c->result() as $val_c) {
-                $nmsnc = $val_c->no_mesin;
+                //$nmsnc = $val_c->no_mesin;
+                $nmsnc = str_replace([' ', ',', '.', '-'], '', strtoupper($val_c->no_mesin));
                 $cek_dtc = $this->db->query("SELECT * FROM produksi_mesin_ajl WHERE no_mesin='$nmsnc' ORDER BY id_produksi_mesin DESC LIMIT 1");
                 if($cek_dtc->row("proses") == "onproses"){
                     $mesin_nyala3 = "on";
@@ -495,13 +507,18 @@ class Prosesajax extends CI_Controller
                     $mesin_nyala3 = "off";
                 }
                 if($cek_dtc->num_rows() == 1){
-                    $kons3 = strtoupper($cek_dtc->row("konstruksi"));
+                    $id_produksi_mesin = $cek_dta->row("id_produksi_mesin");
+                    $this->db->query("UPDATE produksi_mesin_ajl SET no_mesin='$nmsnc' WHERE id_produksi_mesin='$id_produksi_mesin'");
+                    //$kons3 = strtoupper($cek_dtc->row("konstruksi"));
+                    $kons3 = str_replace([' ', ',', '.', '-'], '', strtoupper($cek_dtc->row("konstruksi")));
+                    $this->db->query("UPDATE produksi_mesin_ajl SET konstruksi='$kons3' WHERE id_produksi_mesin='$id_produksi_mesin'");
                 } else {
                     $kons3 = "-";
+                    $id_produksi_mesin = "null";
                 }
                 $idprodc=sha1($cek_dtc->row("id_produksi_mesin"));
             ?>
-            <div class="mesinkotak" onclick="showmodals('<?=$nmsnc;?>','<?=$idprodc;?>')">
+            <div class="mesinkotak" onclick="showmodals('<?=$nmsnc;?>','<?=$idprodc;?>','<?=$id_produksi_mesin;?>')">
                 <span><?=$kons3;?></span>
                 <span class="<?=$mesin_nyala3;?>"><?=strtoupper($nmsnc);?></span>
             </div>
@@ -511,7 +528,8 @@ class Prosesajax extends CI_Controller
         <?php
             $line_d = $this->db->query("SELECT * FROM table_mesin WHERE no_mesin LIKE 'D%' ORDER BY no_mesin");
             foreach ($line_d->result() as $val_d) {
-                $nmsnd = $val_d->no_mesin;
+                //$nmsnd = $val_d->no_mesin;
+                $nmsnd = str_replace([' ', ',', '.', '-'], '', strtoupper($val_d->no_mesin));
                 $cek_dtd = $this->db->query("SELECT * FROM produksi_mesin_ajl WHERE no_mesin='$nmsnd' ORDER BY id_produksi_mesin DESC LIMIT 1");
                 if($cek_dtd->row("proses") == "onproses"){
                     $mesin_nyala4 = "on";
@@ -519,13 +537,18 @@ class Prosesajax extends CI_Controller
                     $mesin_nyala4 = "off";
                 }
                 if($cek_dtd->num_rows() == 1){
-                    $kons4 = strtoupper($cek_dtd->row("konstruksi"));
+                    $id_produksi_mesin = $cek_dta->row("id_produksi_mesin");
+                    $this->db->query("UPDATE produksi_mesin_ajl SET no_mesin='$nmsnd' WHERE id_produksi_mesin='$id_produksi_mesin'");
+                    //$kons4 = strtoupper($cek_dtd->row("konstruksi"));
+                    $kons4 = str_replace([' ', ',', '.', '-'], '', strtoupper($cek_dtd->row("konstruksi")));
+                    $this->db->query("UPDATE produksi_mesin_ajl SET konstruksi='$kons4' WHERE id_produksi_mesin='$id_produksi_mesin'");
                 } else {
                     $kons4 = "-";
+                    $id_produksi_mesin = "null";
                 }
                 $idprodd=sha1($cek_dtd->row("id_produksi_mesin"));
             ?>
-            <div class="mesinkotak full" onclick="showmodals('<?=$nmsnd;?>','<?=$idprodd;?>')">
+            <div class="mesinkotak full" onclick="showmodals('<?=$nmsnd;?>','<?=$idprodd;?>','<?=$id_produksi_mesin;?>')">
                 <span><?=$kons4;?></span>
                 <span class="<?=$mesin_nyala4;?>"><?=strtoupper($nmsnd);?></span>
             </div>
@@ -534,39 +557,38 @@ class Prosesajax extends CI_Controller
             <?php
         } else {
             $mesin = $this->db->query("SELECT * FROM table_mesin WHERE no_mesin LIKE '%$kode%'");
-        }
-        if($mesin->num_rows() > 0 ){
-            echo "<div style='width:100%; display:flex; flex-wrap:wrap;justify-content:center;'>";
-            foreach($mesin->result() as $val){
+            if($mesin->num_rows() > 0 ){
+                echo "<div style='width:100%; display:flex; flex-wrap:wrap;justify-content:center;'>";
+                foreach($mesin->result() as $val){
+                    
+                    $msnh = $val->no_mesin;
+                    $cek_dth = $this->db->query("SELECT * FROM produksi_mesin_ajl WHERE no_mesin='$msnh' ORDER BY id_produksi_mesin DESC LIMIT 1");
+                    if($cek_dth->row("proses") == "onproses"){
+                        $mesin_nyala4 = "on";
+                    } else {
+                        $mesin_nyala4 = "off";
+                    }
+                    if($cek_dth->num_rows() == 1){
+                        $kons4 = strtoupper($cek_dth->row("konstruksi"));
+                    } else {
+                        $kons4 = "-";
+                    }
+                    $idprodh=sha1($cek_dth->row("id_produksi_mesin"));
+                    $id_produksi_mesin=$cek_dth->row("id_produksi_mesin");
+                ?>
                 
-                $msnh = $val->no_mesin;
-                $cek_dth = $this->db->query("SELECT * FROM produksi_mesin_ajl WHERE no_mesin='$msnh' ORDER BY id_produksi_mesin DESC LIMIT 1");
-                if($cek_dth->row("proses") == "onproses"){
-                    $mesin_nyala4 = "on";
-                } else {
-                    $mesin_nyala4 = "off";
+                    <div class="mesinkotak pch" onclick="showmodals('<?=$msnh;?>','<?=$idprodb;?>','<?=$id_produksi_mesin;?>')">
+                        <span><?=$kons4;?></span>
+                        <span class="<?=$mesin_nyala4;?>"><?=$msnh;?></span>
+                    </div>
+                    <?php
+                    
                 }
-                if($cek_dth->num_rows() == 1){
-                    $kons4 = strtoupper($cek_dth->row("konstruksi"));
-                } else {
-                    $kons4 = "-";
-                }
-                $idprodh=sha1($cek_dth->row("id_produksi_mesin"));
-            ?>
-            
-                <div class="mesinkotak pch" onclick="showmodals('<?=$msnh;?>','<?=$idprodb;?>')">
-                    <span><?=$kons4;?></span>
-                    <span class="<?=$mesin_nyala4;?>"><?=$msnh;?></span>
-                </div>
-                <?php
-                
+                echo "</div>";
+            } else {
+                echo "<p>Tidak ada data mesin</p>";
             }
-            echo "</div>";
-        } else {
-            echo "<p>Tidak ada data mesin</p>";
         }
-        
-
   }//end
 
   function savedLoomCounter23(){

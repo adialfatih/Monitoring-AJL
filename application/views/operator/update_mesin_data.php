@@ -352,7 +352,7 @@
       const autoCompleteJS = new autoComplete({
             placeHolder: "Konstruksi",
             data: {
-                src: [ "SM02", "SM03", "SM04", "SM05A", "SM05B", "SM05C", "SM05D", "SM05F", "SM05G", "SM05H", "SM13", "SM13A", "SM13B", "SM13C", "SM13C", "SM15", "SM15A", "SM15B", "SM15C", "SM15D", "SM15H", "SM15J", "SM15K", "SM15L", "SM16", "SM17", "SM17A", "SM18", "SM16A", "SM16B", "SM19", "SM05K", "SM13D", "SM09A", "SM03A", "SM05J", "SM20","SM13E", "SM05L", "SM05L_RJS", "SM13F", "SM13G", "SM13H", "SM13J", "SM05M", "SM17B", "SM05B_RJS", "SM13K", "SM13L", "GS15", "GS05", "GS06", "LC140", "LC158", "SM16C"
+                src: [ "RJ02", "RJ03", "RJ04", "RJ05A", "RJ05B", "RJ05C", "RJ05D", "RJ05F", "RJ05G", "RJ05H", "RJ13", "RJ13A", "RJ13B", "RJ13C", "RJ13C", "RJ15", "RJ15A", "RJ15B", "RJ15C", "RJ15D", "RJ15H", "RJ15J", "RJ15K", "RJ15L", "RJ16", "RJ17", "RJ17A", "RJ18", "RJ16A", "RJ16B", "RJ19", "RJ05K", "RJ13D", "RJ09A", "RJ03A", "RJ05J", "RJ20","RJ13E", "RJ05L", "RJ05L_RJS", "RJ13F", "RJ13G", "RJ13H", "RJ13J", "RJ05M", "RJ17B", "RJ05B_RJS", "RJ13K", "RJ13L", "GS15", "GS05", "GS06", "LC140", "LC158", "RJ16C"
                 ],
                 cache: true,
             },

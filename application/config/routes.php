@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'beranda';
 $route['dashboard'] = 'beranda';
-$route['pembelian-benang/(:any)'] = 'beranda/belibenang';
+$route['pembelian-benang/(:any)'] = 'beranda/belibenang'; 
 $route['pembelian-benang'] = 'beranda/belibenang';
 $route['data-pembelian-benang'] = 'beranda/belibenangdata';
 $route['generate-kode/(:num)'] = 'beranda/generatekode/$1';
