@@ -1273,6 +1273,16 @@ class Proses extends CI_Controller
                 ?>
                 <p style="font-weight:bold;margin-bottom:15px;font-size:23px;">NOMOR MESIN <?=$mc;?></p>
                 <div style="width: 100%; display: flex; align-items: center; margin-bottom: 10px; font-family: 'Noto Sans', sans-serif;">
+                    <label for="konstruksiID" style="margin-right: 10px; white-space: nowrap; font-weight: 500;width:35%;text-align:left;">ID</label>
+                    <input 
+                        type="text" 
+                        id="idID" 
+                        style="flex: 1; padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; outline-color: #4a90e2;"
+                        value="<?=$_idReal;?>"
+                        placeholder="Masukan ID" disabled
+                    >
+                </div>
+                <div style="width: 100%; display: flex; align-items: center; margin-bottom: 10px; font-family: 'Noto Sans', sans-serif;">
                     <label for="konstruksiID" style="margin-right: 10px; white-space: nowrap; font-weight: 500;width:35%;text-align:left;">Konstruksi</label>
                     <input 
                         type="text" 
@@ -1358,7 +1368,7 @@ class Proses extends CI_Controller
         $orang = $this->session->userdata('nama');
         $_kons = strtoupper(str_replace([' ', '-', '.', ','], '', $kons));
         $xxt = "";
-        $cekId = $this->data_model->get_byid('produksi_mesin_ajl',['id_produksi_mesin'=>$cekId])->row_array();
+        $cekId = $this->data_model->get_byid('produksi_mesin_ajl',['id_produksi_mesin'=>$id])->row_array();
         $konsold = $cekId['konstruksi'];
         $pickold = $cekId['pick'];
 

@@ -217,7 +217,7 @@
         var span = document.getElementsByClassName("close")[0];
         //let cacheData = null;
         
-        <?php if($nmuser=="anding" OR $nmuser=="admin" OR $nmuser=="septi" OR $nmuser=="septi diah" OR $nmuser=="arrum" OR $nmuser=="adish"){ ?>
+        <?php if($nmuser=="anding" OR $nmuser=="admin" OR $nmuser=="septi" OR $nmuser=="septi diah" OR $nmuser=="Arrum" OR $nmuser=="adish"){ ?>
         
             function showmodals(msn,id,idasli) { 
                 console.log('open modal 1 {'+msn+'} - {'+id+'} {'+idasli+'}');

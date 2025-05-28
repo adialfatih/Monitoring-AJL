@@ -477,7 +477,7 @@ class Prosesajax extends CI_Controller
                     $mesin_nyala2 = "off";
                 }
                 if($cek_dtb->num_rows() == 1){
-                    $id_produksi_mesin = $cek_dta->row("id_produksi_mesin");
+                    $id_produksi_mesin = $cek_dtb->row("id_produksi_mesin");
                     $this->db->query("UPDATE produksi_mesin_ajl SET no_mesin='$nmsnb' WHERE id_produksi_mesin='$id_produksi_mesin'");
                     //$kons2 = strtoupper($cek_dtb->row("konstruksi"));
                     $kons2 = str_replace([' ', ',', '.', '-'], '', strtoupper($cek_dtb->row("konstruksi")));
@@ -507,7 +507,7 @@ class Prosesajax extends CI_Controller
                     $mesin_nyala3 = "off";
                 }
                 if($cek_dtc->num_rows() == 1){
-                    $id_produksi_mesin = $cek_dta->row("id_produksi_mesin");
+                    $id_produksi_mesin = $cek_dtc->row("id_produksi_mesin");
                     $this->db->query("UPDATE produksi_mesin_ajl SET no_mesin='$nmsnc' WHERE id_produksi_mesin='$id_produksi_mesin'");
                     //$kons3 = strtoupper($cek_dtc->row("konstruksi"));
                     $kons3 = str_replace([' ', ',', '.', '-'], '', strtoupper($cek_dtc->row("konstruksi")));
@@ -537,7 +537,7 @@ class Prosesajax extends CI_Controller
                     $mesin_nyala4 = "off";
                 }
                 if($cek_dtd->num_rows() == 1){
-                    $id_produksi_mesin = $cek_dta->row("id_produksi_mesin");
+                    $id_produksi_mesin = $cek_dtd->row("id_produksi_mesin");
                     $this->db->query("UPDATE produksi_mesin_ajl SET no_mesin='$nmsnd' WHERE id_produksi_mesin='$id_produksi_mesin'");
                     //$kons4 = strtoupper($cek_dtd->row("konstruksi"));
                     $kons4 = str_replace([' ', ',', '.', '-'], '', strtoupper($cek_dtd->row("konstruksi")));
